@@ -24,15 +24,17 @@ public class Player{
 	}
 	
 	public void updateBullets(int mx, int my){
-		System.out.println(bullets.size());
 		if (bullets.size() != 0){
 			List<Projectile> toRemove = new ArrayList<Projectile>();
-			for(Projectile b : bullets){
+			Iterator itr = bullets.iterator();
+			while(itr.hasNext()){
+				Projectile b = (Projectile)itr.next();
 				b.move();
 				if(b.outOfBounds()){
-					toRemove.add(b);
+					itr.remove();
 				}
 			}
+			
 		}
 	}
 	

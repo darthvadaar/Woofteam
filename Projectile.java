@@ -21,14 +21,14 @@ public class Projectile{
 		}
 		this.x = px;
 		this.y = py;
-		this.ang = Math.atan((my - py)/(mx - px));
+		this.ang = Math.atan2((my - py), (mx - px));
 		vx = speed * Math.cos(ang);
 		vy = speed * Math.sin(ang);
 	}
 	
 	public void move(){
 		x += vx;
-		y -= vy;
+		y += vy;
 	}
 	
 	public boolean outOfBounds(){

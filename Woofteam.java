@@ -97,7 +97,6 @@ class Panel extends JPanel implements KeyListener, MouseMotionListener {
 	public void mouseMoved(MouseEvent e) {
 		mx = e.getX();
 		my = e.getY();
-		System.out.println("" + mx + "," + my);
 	}
 	public void mouseDragged(MouseEvent e){
 	}
