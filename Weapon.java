@@ -11,4 +11,6 @@ public class Weapon{
 		this.bullet = bullet;
 	}
 	
+	
+	
 }

@@ -30,8 +30,7 @@ public class Woofteam extends JFrame implements ActionListener{
 		
 	@Override
 	public void actionPerformed(ActionEvent evt){
-		game.controls();
-		game.updateBullets();
+		game.move();
 		game.repaint();
 	}
 	
@@ -42,27 +41,21 @@ public class Woofteam extends JFrame implements ActionListener{
 //______________________________________________________
 //_______________________PANEL__________________________
 
-class Panel extends JPanel implements KeyListener, MouseMotionListener {
+class Panel extends JPanel implements KeyListener{
 	private boolean []keys;
 	private Woofteam mainFrame;
-	private Player p = new Player(500,500,3,"");
-	private int mx, my;
 //	Image enemyImg1;
 	
 	public Panel(Woofteam m){
 		keys = new boolean[KeyEvent.KEY_LAST+1];
-//		try {
-////    		enemyImg1 = new ImageIcon("e1.gif").getImage();
-//		} 
-//		catch (IOException e) {
-//		}
+		try {
+//    		enemyImg1 = new ImageIcon("e1.gif").getImage();
+		} 
+		catch (IOException e) {
+		}
 		mainFrame = m;
 		setSize(800,850);
-		mx = 0;
-		my = 0;
         addKeyListener(this);
-        addMouseMotionListener(this);
-	}
 		
     public void addNotify() {
         super.addNotify();
@@ -79,46 +72,31 @@ class Panel extends JPanel implements KeyListener, MouseMotionListener {
     public void keyReleased(KeyEvent e) {
     	keys[e.getKeyCode()] = false;
     }
-    
-    public void updateBullets(){
-    	p.updateBullets(mx, my);
-    }
    
     public void controls(){
 		if(keys[KeyEvent.VK_RIGHT] ){
-			p.shoot(mx, my);
+			p1.moveR();
 		}
 		if(keys[KeyEvent.VK_LEFT] ){
+			p1.moveL();
 		}
 		if(keys[KeyEvent.VK_SPACE] ){
+			if (p1.getBullet().getX() == p1.getBullet().getdummyX() && p1.getBullet().getY() == p1.getBullet().getdummyY()){
+				p1.shoot();
+			}
 		}
 	}
 	
-	public void mouseMoved(MouseEvent e) {
-		mx = e.getX();
-		my = e.getY();
-		System.out.println("" + mx + "," + my);
+	public void move(){
+		//all movement is controlled through this method
+		
 	}
-	public void mouseDragged(MouseEvent e){
-	}
-	public void mouseEntered(MouseEvent e) {
-	}
-	public void mouseExited(MouseEvent e) {
-	}
-	
-
     
     public void paintComponent(Graphics g){
     	Font f = new Font("Monospaced",Font.BOLD, 20);
     	g.setFont(f);
     	g.setColor(Color.black);
-    	g.fillRect(0, 0, 850,850);
-    	g.setColor(Color.red);
-    	g.fillRect(p.getX(), p.getY(), 50,50);
-    	for(Projectile b : p.getBullets()){
-    		g.fillRect(b.getX(), b.getY(), 10, 10);
-    	}
-    	
+    	g.drawRectangle();
 //		g.drawImage(playerImg, 125 + 50 * i, 780, this);
 						
     }
